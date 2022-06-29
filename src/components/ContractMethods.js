@@ -14,6 +14,7 @@ export const readStats = async () => {
   if (typeof window.ethereum !== "undefined") {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
+
     const contract = new ethers.Contract(contractAddress, abi, signer);
     try {
       let { temperature, humidity, moisture } = await contract.readStats();
@@ -29,6 +30,9 @@ export const readStats = async () => {
     } catch (e) {
       console.log(e);
     }
+  } else {
+    console.log("Metamask not installed");
+    return;
   }
 };
 
@@ -46,6 +50,9 @@ export const getEthInUsd = async () => {
     } catch (error) {
       console.log(error);
     }
+  } else {
+    console.log("Metamask not installed");
+    return;
   }
 };
 
@@ -65,6 +72,9 @@ export const updateStats = async (temperature, humidity, moisture) => {
     } catch (error) {
       console.log(error);
     }
+  } else {
+    console.log("Metamask not installed");
+    return;
   }
 };
 
